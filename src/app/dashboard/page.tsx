@@ -69,7 +69,6 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>System Overview</CardTitle>
-            <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -91,7 +90,6 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Temperature Status</CardTitle>
-            <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -127,7 +125,6 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Pressure Status</CardTitle>
-            <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -161,7 +158,6 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Flow Status</CardTitle>
-            <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
           </CardHeader>
           <CardContent>
             <div className="space-y-4">

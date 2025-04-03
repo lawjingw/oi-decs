@@ -1,10 +1,10 @@
 import React from "react";
 
-interface MainLayoutProps {
+type MainLayoutProps = {
   children: React.ReactNode;
-}
+};
 
-export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+export function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm">
@@ -26,4 +26,4 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       </footer>
     </div>
   );
-};
+}
