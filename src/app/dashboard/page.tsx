@@ -10,11 +10,13 @@ import { useStore } from "@/store/useStore";
 import { formatValue } from "@/lib/utiles";
 import { deviceMap, deviceParameters } from "@/data/sampleData";
 import { Maximize2, Plus } from "lucide-react";
+import { TimeRangeSelector } from "@/components/TimeRangeSelector";
 
 export default function DashboardPage() {
   const { systemStatus, startSimulation, stopSimulation } = useStore();
   const [mounted, setMounted] = useState(false);
   const [selectedDevice] = useState<string | null>(null);
+  const [timeRange, setTimeRange] = useState(24); // Default 24 hours
 
   // Transform device parameters to array format
   const transformParameters = (params: Record<string, string>) => {
@@ -54,7 +56,13 @@ export default function DashboardPage() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      <div className="flex justify-between mb-6">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <TimeRangeSelector
+          selectedRange={timeRange}
+          onRangeChange={setTimeRange}
+        />
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
         {/* System Overview Card */}
@@ -183,36 +191,38 @@ export default function DashboardPage() {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Temperature Measurements</CardTitle>
-            <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
-          </CardHeader>
-          <CardContent>
-            <TemperatureChart />
-          </CardContent>
-        </Card>
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle>Temperature Measurements</CardTitle>
+              <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
+            </CardHeader>
+            <CardContent>
+              <TemperatureChart timeRange={timeRange} />
+            </CardContent>
+          </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Pressure Measurements</CardTitle>
-            <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
-          </CardHeader>
-          <CardContent>
-            <PressureChart />
-          </CardContent>
-        </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle>Pressure Measurements</CardTitle>
+              <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
+            </CardHeader>
+            <CardContent>
+              <PressureChart timeRange={timeRange} />
+            </CardContent>
+          </Card>
 
-        <Card className="md:col-span-2">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Flow Measurements</CardTitle>
-            <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
-          </CardHeader>
-          <CardContent>
-            <FlowChart />
-          </CardContent>
-        </Card>
+          <Card className="md:col-span-2">
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle>Flow Measurements</CardTitle>
+              <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
+            </CardHeader>
+            <CardContent>
+              <FlowChart timeRange={timeRange} />
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       {/* Device Details Section */}

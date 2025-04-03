@@ -16,9 +16,10 @@ const availableDevices = [
 
 type FlowChartProps = {
   selectedDevice?: string;
+  timeRange: number;
 };
 
-export function FlowChart({ selectedDevice }: FlowChartProps) {
+export function FlowChart({ selectedDevice, timeRange }: FlowChartProps) {
   const [data, setData] = useState<FlowData[]>([]);
   const [selectedDevices, setSelectedDevices] = useState<string[]>(
     selectedDevice ? [selectedDevice] : availableDevices.map((d) => d.name)
@@ -32,7 +33,7 @@ export function FlowChart({ selectedDevice }: FlowChartProps) {
 
   useEffect(() => {
     // Generate initial data
-    const historicalData = generateHistoricalData(24);
+    const historicalData = generateHistoricalData(timeRange);
     const initialData = historicalData.map((item: SystemStatus) => {
       const dataPoint: FlowData = {
         timestamp: item.timestamp,
@@ -72,7 +73,7 @@ export function FlowChart({ selectedDevice }: FlowChartProps) {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [timeRange]);
 
   const handleDeviceToggle = (deviceName: string) => {
     setSelectedDevices((prev) =>

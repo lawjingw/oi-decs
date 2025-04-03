@@ -21,9 +21,13 @@ const availableDevices = [
 
 type PressureChartProps = {
   selectedDevice?: string;
+  timeRange: number;
 };
 
-export function PressureChart({ selectedDevice }: PressureChartProps) {
+export function PressureChart({
+  selectedDevice,
+  timeRange,
+}: PressureChartProps) {
   const [data, setData] = useState<PressureData[]>([]);
   const [selectedDevices, setSelectedDevices] = useState<string[]>(
     selectedDevice ? [selectedDevice] : availableDevices.map((d) => d.name)
@@ -37,7 +41,7 @@ export function PressureChart({ selectedDevice }: PressureChartProps) {
 
   useEffect(() => {
     // Generate initial data
-    const historicalData = generateHistoricalData(24);
+    const historicalData = generateHistoricalData(timeRange);
     const initialData = historicalData.map((item: SystemStatus) => {
       const dataPoint: PressureData = {
         timestamp: item.timestamp,
@@ -86,7 +90,7 @@ export function PressureChart({ selectedDevice }: PressureChartProps) {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [timeRange]);
 
   const handleDeviceToggle = (deviceName: string) => {
     setSelectedDevices((prev) =>

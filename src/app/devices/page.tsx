@@ -110,6 +110,7 @@ export default function DevicesPage() {
           <TemperatureChart
             key={selectedDevice}
             selectedDevice={selectedDevice || undefined}
+            timeRange={24}
           />
         );
       case "pressure":
@@ -117,6 +118,7 @@ export default function DevicesPage() {
           <PressureChart
             key={selectedDevice}
             selectedDevice={selectedDevice || undefined}
+            timeRange={24}
           />
         );
       case "flow":
@@ -124,6 +126,7 @@ export default function DevicesPage() {
           <FlowChart
             key={selectedDevice}
             selectedDevice={selectedDevice || undefined}
+            timeRange={24}
           />
         );
       default:

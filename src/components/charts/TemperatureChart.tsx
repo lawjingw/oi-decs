@@ -22,9 +22,13 @@ const availableDevices = [
 
 type TemperatureChartProps = {
   selectedDevice?: string;
+  timeRange: number;
 };
 
-export function TemperatureChart({ selectedDevice }: TemperatureChartProps) {
+export function TemperatureChart({
+  selectedDevice,
+  timeRange,
+}: TemperatureChartProps) {
   const [data, setData] = useState<TemperatureData[]>([]);
   const [selectedDevices, setSelectedDevices] = useState<string[]>(
     selectedDevice ? [selectedDevice] : availableDevices.map((d) => d.name)
@@ -37,8 +41,8 @@ export function TemperatureChart({ selectedDevice }: TemperatureChartProps) {
   }, [selectedDevice]);
 
   useEffect(() => {
-    // Generate initial data
-    const historicalData = generateHistoricalData(24);
+    // Generate initial historical data
+    const historicalData = generateHistoricalData(timeRange);
     const initialData = historicalData.map((item: SystemStatus) => ({
       timestamp: item.timestamp,
       label: new Date(item.timestamp).toLocaleString(),
@@ -51,6 +55,8 @@ export function TemperatureChart({ selectedDevice }: TemperatureChartProps) {
       "mag-msp-s": Number(item["mag-msp-s"]?.toFixed(5) || "0"),
     }));
     setData(initialData);
+
+    // Set up interval for real-time updates
 
     // Set up real-time updates (mock for now)
     const interval = setInterval(() => {
@@ -93,7 +99,7 @@ export function TemperatureChart({ selectedDevice }: TemperatureChartProps) {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [timeRange]);
 
   const handleDeviceToggle = (deviceName: string) => {
     setSelectedDevices((prev) =>
