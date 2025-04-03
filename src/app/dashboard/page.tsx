@@ -11,12 +11,14 @@ import { formatValue } from "@/lib/utiles";
 import { deviceMap, deviceParameters } from "@/data/sampleData";
 import { Maximize2, Plus } from "lucide-react";
 import { TimeRangeSelector } from "@/components/TimeRangeSelector";
+import { WidgetModal } from "@/components/WidgetModal";
 
 export default function DashboardPage() {
   const { systemStatus, startSimulation, stopSimulation } = useStore();
   const [mounted, setMounted] = useState(false);
   const [selectedDevice] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(24); // Default 24 hours
+  const [isWidgetModalOpen, setIsWidgetModalOpen] = useState(false);
 
   // Transform device parameters to array format
   const transformParameters = (params: Record<string, string>) => {
@@ -24,6 +26,11 @@ export default function DashboardPage() {
       name,
       value,
     }));
+  };
+
+  const handleAddWidget = (widgetId: string) => {
+    // TODO: Implement widget addition logic
+    console.log("Adding widget:", widgetId);
   };
 
   useEffect(() => {
@@ -242,10 +249,7 @@ export default function DashboardPage() {
         className="mt-6 flex items-center justify-center w-full p-6 rounded-lg border-2 border-dashed 
           border-blue-200 hover:border-blue-400 hover:bg-gradient-to-r hover:from-blue-50 hover:to-indigo-50 
           transition-all duration-300 group relative overflow-hidden"
-        onClick={() => {
-          // TODO: Implement widget addition logic
-          console.log("Add widget clicked");
-        }}
+        onClick={() => setIsWidgetModalOpen(true)}
       >
         <div className="flex items-center space-x-3 text-blue-500 group-hover:text-blue-600 z-10">
           <div className="p-2.5 rounded-full bg-blue-100 group-hover:bg-blue-200 transition-colors">
@@ -258,6 +262,12 @@ export default function DashboardPage() {
           opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         />
       </button>
+
+      <WidgetModal
+        open={isWidgetModalOpen}
+        onOpenChange={setIsWidgetModalOpen}
+        onAddWidget={handleAddWidget}
+      />
     </>
   );
 }
