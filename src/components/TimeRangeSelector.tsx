@@ -27,7 +27,7 @@ export function TimeRangeSelector({
     <div className="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-lg shadow-sm">
       <div className="flex items-center text-slate-600 dark:text-slate-300 px-2">
         <Clock className="h-4 w-4 mr-1.5" />
-        <span className="text-sm font-medium">Time Range:</span>
+        <span className="text-sm font-medium hidden sm:block">Time Range:</span>
       </div>
       <div className="flex space-x-1">
         {timeRanges.map((range) => (

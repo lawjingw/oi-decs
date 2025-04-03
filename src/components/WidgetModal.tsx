@@ -22,13 +22,13 @@ import {
   LucideIcon,
 } from "lucide-react";
 
-interface Widget {
+type Widget = {
   id: string;
   title: string;
   description: string;
   icon: LucideIcon;
   type: "chart" | "metric" | "alert";
-}
+};
 
 const availableWidgets: Widget[] = [
   {
@@ -89,11 +89,11 @@ const availableWidgets: Widget[] = [
   },
 ];
 
-interface WidgetModalProps {
+type WidgetModalProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onAddWidget: (widgetId: string) => void;
-}
+};
 
 export function WidgetModal({
   open,
@@ -144,10 +144,18 @@ export function WidgetModal({
           ))}
         </div>
         <div className="flex justify-end space-x-2 mt-6">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button
+            variant="outline"
+            onClick={() => onOpenChange(false)}
+            className="px-6 py-2 text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          >
             Cancel
           </Button>
-          <Button onClick={handleAddWidget} disabled={!selectedWidget}>
+          <Button
+            onClick={handleAddWidget}
+            disabled={!selectedWidget}
+            className="px-6 py-2 text-sm font-medium bg-primary-900 hover:bg-primary-900/90 text-white shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+          >
             Add Widget
           </Button>
         </div>
