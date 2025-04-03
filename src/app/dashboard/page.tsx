@@ -192,7 +192,7 @@ export default function DashboardPage() {
 
       {/* Charts Section */}
       <div className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Temperature Measurements</CardTitle>
@@ -213,7 +213,7 @@ export default function DashboardPage() {
             </CardContent>
           </Card>
 
-          <Card className="md:col-span-2">
+          <Card className="lg:col-span-2">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Flow Measurements</CardTitle>
               <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
