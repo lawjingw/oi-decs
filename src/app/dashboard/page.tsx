@@ -56,7 +56,7 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="flex justify-between mb-6">
+      <div className="flex justify-between mb-6 items-center gap-3 flex-col sm:flex-row">
         <h1 className="text-3xl font-bold">Dashboard</h1>
         <TimeRangeSelector
           selectedRange={timeRange}
