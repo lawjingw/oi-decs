@@ -1,103 +1,132 @@
-import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+  Gauge,
+  Thermometer,
+  Wind,
+  Activity,
+  BarChart3,
+  Bell,
+} from "lucide-react";
+import Link from "next/link";
 
-export default function Home() {
+const features = [
+  {
+    title: "Temperature Monitoring",
+    description:
+      "Real-time temperature tracking with high precision measurements down to 0.001K",
+    icon: Thermometer,
+    color: "text-red-500",
+    bgColor: "bg-red-50",
+  },
+  {
+    title: "Pressure Control",
+    description:
+      "Advanced pressure monitoring and control systems for vacuum environments",
+    icon: Gauge,
+    color: "text-blue-500",
+    bgColor: "bg-blue-50",
+  },
+  {
+    title: "Flow Management",
+    description:
+      "Precise flow rate control and monitoring for optimal system performance",
+    icon: Wind,
+    color: "text-green-500",
+    bgColor: "bg-green-50",
+  },
+];
+
+const quickLinks = [
+  {
+    title: "Dashboard",
+    description: "View system overview and real-time metrics",
+    icon: BarChart3,
+    href: "/dashboard",
+    color: "text-purple-500",
+    bgColor: "bg-purple-50",
+  },
+  {
+    title: "Devices",
+    description: "Manage and monitor individual devices",
+    icon: Activity,
+    href: "/devices",
+    color: "text-indigo-500",
+    bgColor: "bg-indigo-50",
+  },
+  {
+    title: "Alerts",
+    description: "View system alerts and notifications",
+    icon: Bell,
+    href: "/alerts",
+    color: "text-orange-500",
+    bgColor: "bg-orange-50",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="flex-1 space-y-8 p-8 pt-6">
+      <div className="flex flex-col space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">
+          Welcome to oi.DECS
+        </h1>
+        <p className="text-muted-foreground">
+          Control system for managing low-temperature and cryomagnetic systems
+        </p>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Features Section */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight">Key Features</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature) => (
+            <Card
+              key={feature.title}
+              className="transition-all hover:shadow-md"
+            >
+              <CardHeader>
+                <div className="flex items-center space-x-3">
+                  <div className={`p-2 rounded-lg ${feature.bgColor}`}>
+                    <feature.icon className={`h-6 w-6 ${feature.color}`} />
+                  </div>
+                  <CardTitle>{feature.title}</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  {feature.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+
+      {/* Quick Access Section */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight">Quick Access</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {quickLinks.map((link) => (
+            <Link key={link.title} href={link.href}>
+              <Card className="transition-all hover:shadow-md hover:bg-accent/50 cursor-pointer">
+                <CardHeader>
+                  <div className="flex items-center space-x-3">
+                    <div className={`p-2 rounded-lg ${link.bgColor}`}>
+                      <link.icon className={`h-6 w-6 ${link.color}`} />
+                    </div>
+                    <div className="space-y-1">
+                      <CardTitle>{link.title}</CardTitle>
+                      <p className="text-sm text-muted-foreground">
+                        {link.description}
+                      </p>
+                    </div>
+                  </div>
+                </CardHeader>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
