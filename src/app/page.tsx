@@ -65,7 +65,7 @@ const quickLinks = [
 
 export default function HomePage() {
   return (
-    <div className="flex-1 space-y-8 p-8 pt-6">
+    <div className="flex-1 space-y-8 pt-6">
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">
           Welcome to oi.DECS

@@ -15,7 +15,7 @@ export function Navigation() {
   return (
     <nav className="border-b border-border bg-primary-900 text-white">
       <div className="px-6">
-        <div className="flex h-14 items-center space-x-8">
+        <div className="flex h-14 items-center space-x-3 justify-between sm:justify-start sm:space-x-8">
           {navigationItems.map((item) => {
             const isActive = pathname === item.href;
             return (
