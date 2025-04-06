@@ -33,7 +33,7 @@ export function DeviceDetails({ deviceName, parameters }: DeviceDetailsProps) {
         {parameters.map((param, index) => (
           <div
             key={index}
-            className="p-4 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+            className="p-4 rounded-lg bg-slate-100 hover:bg-accent/50 transition-colors"
           >
             <div className="flex items-start justify-between">
               <div className="space-y-1">

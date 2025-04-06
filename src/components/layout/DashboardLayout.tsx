@@ -12,7 +12,7 @@ export function DashboardLayout({ children, className }: DashboardLayoutProps) {
     <div className="min-h-screen bg-background">
       <div className="flex h-screen">
         {/* Sidebar */}
-        <aside className="w-64 border-r bg-card">
+        <aside className="w-64 border-r bg-slate-100">
           <div className="flex h-16 items-center border-b px-6">
             <h1 className="text-xl font-semibold">oi.DECS</h1>
           </div>
