@@ -12,6 +12,7 @@ import { deviceMap, deviceParameters } from "@/data/sampleData";
 import { Maximize2, Plus } from "lucide-react";
 import { TimeRangeSelector } from "@/components/TimeRangeSelector";
 import { WidgetModal } from "@/components/WidgetModal";
+import { ChartModal } from "@/components/ChartModal";
 
 export default function DashboardPage() {
   const { systemStatus, startSimulation, stopSimulation } = useStore();
@@ -19,6 +20,9 @@ export default function DashboardPage() {
   const [selectedDevice] = useState<string | null>(null);
   const [timeRange, setTimeRange] = useState(24); // Default 24 hours
   const [isWidgetModalOpen, setIsWidgetModalOpen] = useState(false);
+  const [maximizedChart, setMaximizedChart] = useState<
+    "temperature" | "pressure" | "flow" | null
+  >(null);
 
   // Transform device parameters to array format
   const transformParameters = (params: Record<string, string>) => {
@@ -199,7 +203,10 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Temperature Measurements</CardTitle>
-              <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
+              <Maximize2
+                className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-primary transition-colors hidden sm:block"
+                onClick={() => setMaximizedChart("temperature")}
+              />
             </CardHeader>
             <CardContent>
               <TemperatureChart timeRange={timeRange} />
@@ -209,7 +216,10 @@ export default function DashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Pressure Measurements</CardTitle>
-              <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
+              <Maximize2
+                className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-primary transition-colors hidden sm:block"
+                onClick={() => setMaximizedChart("pressure")}
+              />
             </CardHeader>
             <CardContent>
               <PressureChart timeRange={timeRange} />
@@ -219,7 +229,10 @@ export default function DashboardPage() {
           <Card className="lg:col-span-2">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Flow Measurements</CardTitle>
-              <Maximize2 className="h-4 w-4 text-muted-foreground cursor-pointer" />
+              <Maximize2
+                className="h-4 w-4 text-muted-foreground cursor-pointer hover:text-primary transition-colors hidden sm:block"
+                onClick={() => setMaximizedChart("flow")}
+              />
             </CardHeader>
             <CardContent>
               <FlowChart timeRange={timeRange} />
@@ -267,6 +280,13 @@ export default function DashboardPage() {
         open={isWidgetModalOpen}
         onOpenChange={setIsWidgetModalOpen}
         onAddWidget={handleAddWidget}
+      />
+
+      <ChartModal
+        open={maximizedChart !== null}
+        onOpenChange={(open) => !open && setMaximizedChart(null)}
+        chartType={maximizedChart || "temperature"}
+        timeRange={timeRange}
       />
     </>
   );

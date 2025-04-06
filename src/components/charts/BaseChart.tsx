@@ -59,7 +59,7 @@ export function BaseChart({
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
       <div style={{ width: "100%", height }}>
         <ResponsiveContainer>
